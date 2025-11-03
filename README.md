@@ -1,100 +1,135 @@
-🛰️ GeoClimate-AI
+---
 
-An intelligent system to collect, store, and analyze global weather data using the OpenWeather API.
+ 🌍 GeoClimate-AI
 
- 🌦️ Overview
+AI-Powered Climate Risk & Weather Prediction System
 
-GeoClimate-AI is a data-driven weather intelligence tool that fetches live weather information from the 'OpenWeather API', stores it locally, and prepares it for machine learning analysis.
-It’s designed as the foundation for future climate trend prediction models.
+GeoClimate-AI is an intelligent weather and climate analysis project that collects real-time data, preprocesses it, and trains an AI model to predict temperature trends for different cities.
+It’s the foundation for a future Geo-AI system capable of forecasting extreme climate risks such as floods, droughts, and heatwaves.
 
-⚙️ Features
+---
 
-✅ Fetches real-time weather data (temperature, humidity, pressure, wind speed, etc.)
-✅ Automatically stores weather logs into `data/weather_data.csv`
-✅ Modular structure — easy to extend for ML training or forecasting
-✅ Uses `.env` for secure API key management
+ 🚀 Features
 
-🧩 Project Structure
+  🌦️ Fetches live weather data from the OpenWeather API
+  🧹 Preprocesses and cleans the data automatically
+  🧠 Trains AI model (currently Linear Regression, soon upgraded to Random Forest & LSTM)
+  💾 Saves trained model (`temperature_model.pkl`) for future predictions
+  🔍 Predicts temperature using humidity, pressure, and wind speed
+  📈 Will include visualizations and a Streamlit dashboard** in the next phase
 
-GeoClimate-AI/
+---
+
+ 🧰 Tech Stack
+
+| Category                   | Tools & Libraries           |
+| -------------------------- | --------------------------- |
+| Language                   | Python                      |
+| AI / ML                    | scikit-learn, pandas, numpy |
+| Data Fetching              | OpenWeather API, requests   |
+| Visualization (Next Phase) | matplotlib, seaborn, folium |
+| Web App (Next Phase)       | Streamlit                   |
+| Environment                | VS Code + virtualenv        |
+| Version Control            | Git + GitHub                |
+
+---
+
+ 📂 Project Structure
+
+```
+geoclimate-ai/
 │
+├── data/                      # Weather data CSV files
+├── models/                    # Saved model (.pkl)
 ├── src/
-│   ├── data_loader.py      # Fetches and saves weather data
-│   ├── preprocess.py       # (Future) Data cleaning & transformation
-│   ├── model.py            # (Future) ML model training & evaluation
-│   └── __init__.py
+│   ├── __init__.py
+│   ├── data_loader.py         # Fetches data from OpenWeather API
+│   ├── preprocess.py          # Cleans and prepares dataset
+│   ├── model.py               # Trains ML model & saves it
+│   ├── predict.py             # Predicts temperature using saved model
 │
-├── data/
-│   └── weather_data.csv    # Auto-generated weather logs
-│
-├── .env                    # Contains your OpenWeather API key
-├── main.py                 # Entry point for running the app
-├── requirements.txt        # Python dependencies
+├── .env                       # Contains your API key
 ├── .gitignore
-└── README.md
+├── README.md
+└── main.py                    # Entry point of the project
+```
 
+---
 
- 🚀 Setup Instructions
+⚙️ Setup & Installation
 
 1. Clone the repository
 
-   bash
-   git clone https://github.com/Nithin00614/GeoClimate-AI.git
-   cd GeoClimate-AI
-   
+   ```bash
+   git clone https://github.com/<your-username>/geoclimate-ai.git
+   cd geoclimate-ai
+   ```
 
 2. Create a virtual environment
 
-   bash
+   ```bash
    python -m venv venv
-   venv\Scripts\activate      # On Windows
-   source venv/bin/activate   # On macOS/Linux
-   
+   venv\Scripts\activate  # (Windows)
+   ```
 
 3. Install dependencies
 
-   bash
+   ```bash
    pip install -r requirements.txt
-   
+   ```
 
-4. Set up `.env` file
+   *(If you don’t have one yet, we can create it tomorrow.)*
 
-   
+4. Add your OpenWeather API key
+   Create a file named `.env` and add:
+
+   ```
    OPENWEATHER_API_KEY=your_api_key_here
-   
+   ```
 
 5. Run the project
 
-   bash
+   ```bash
    python main.py
-   
+   ```
 
+---
 
+ 🧪 Current Progress
 
-🧠 Tech Stack
+✅ Weather data fetching from OpenWeather API
+✅ Preprocessing pipeline built
+✅ Linear Regression model trained & evaluated
+✅ Model successfully saved & used for prediction
+🔄 Next: Visualization + Streamlit dashboard
 
-* Python 3.10+
-* Requests for API calls
-* Pandas for data handling
-* dotenv for environment management
-* (Planned) Scikit-learn / TensorFlow for climate predictions
+---
 
+ 📊 Example Output
 
- 🧭 Next Steps
+```
+🤖 Training temperature prediction model...
+✅ Model trained successfully!
+📊 Mean Absolute Error: 1.52
+📈 R² Score: -0.24
+💾 Model saved successfully!
 
-* Add preprocessing pipeline (`src/preprocess.py`)
-* Build ML model to predict temperature trends
-* Deploy via Streamlit or Flask dashboard
-* Automate data collection using schedulers or cron jobs
+🌡️ Testing saved model for prediction...
+🤖 Predicted Temperature: 26.31 °C
+🎯 All steps completed successfully!
+```
 
+---
 
- 👨‍💻 Author
+🌱 Next Development Phases
+
+1. Upgrade ML model → RandomForest / LSTM for time-series forecasting
+2. Visualization → Real-time trend plots using matplotlib
+3. Streamlit App → Interactive city-based prediction dashboard
+4. Geo-Analytics → Integrate geospatial features using GeoPandas & Folium
+
+---
+👨‍💻 Author
 
 Nithin Gowda
-📫 [Your LinkedIn or email (optional)]
-
- 📜 License
-
-This project is licensed under the MIT License — feel free to use and improve it!
-
 
