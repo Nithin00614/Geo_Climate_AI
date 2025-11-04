@@ -1,65 +1,59 @@
+from dotenv import load_dotenv
 import os
 import requests
 import pandas as pd
-from dotenv import load_dotenv
 from datetime import datetime
 
-# ✅ Load environment variables from the project root (.env)
+# Load .env file
 load_dotenv()
-
-# ✅ Get API key from .env file
 API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
 
-def fetch_weather_data(city_name):
+def fetch_weather_data(cities=None):
     """
-    Fetch current weather data for a given city using the OpenWeather API.
+    Fetch weather data for multiple cities and save it as a CSV.
     """
-    base_url = "https://api.openweathermap.org/data/2.5/weather"
-    params = {
-        "q": city_name,
-        "appid": API_KEY,
-        "units": "metric"
-    }
+    if cities is None:
+        cities = ["Mumbai", "Delhi", "Chennai", "Bangalore", "Kolkata", "Hyderabad"]
 
-    response = requests.get(base_url, params=params)
-    data = response.json()
+    all_data = []
 
-    if response.status_code != 200:
-        print("❌ Error fetching data:", data.get("message"))
+    for city in cities:
+        print(f"🌍 Fetching weather data for {city}...")
+        base_url = "https://api.openweathermap.org/data/2.5/weather"
+        params = {"q": city, "appid": API_KEY, "units": "metric"}
+        response = requests.get(base_url, params=params)
+
+        if response.status_code == 200:
+            data = response.json()
+            weather_info = {
+                "city": city,
+                "temperature": data["main"]["temp"],
+                "humidity": data["main"]["humidity"],
+                "pressure": data["main"]["pressure"],
+                "weather": data["weather"][0]["description"],
+                "wind_speed": data["wind"]["speed"],
+                "date_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }
+            all_data.append(weather_info)
+        else:
+            print(f"❌ Failed to fetch data for {city}: {response.json().get('message')}")
+
+    if not all_data:
+        print("⚠️ No data fetched. Please check your API key or city names.")
         return None
 
-    # ✅ Extract and structure relevant fields
-    weather_info = {
-        "city": city_name,
-        "temperature": data["main"]["temp"],
-        "humidity": data["main"]["humidity"],
-        "pressure": data["main"]["pressure"],
-        "weather": data["weather"][0]["description"],
-        "wind_speed": data["wind"]["speed"],
-        "date_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    }
+    df = pd.DataFrame(all_data)
 
-    return weather_info
+    # Ensure /data folder exists
+    os.makedirs("../data", exist_ok=True)
+    file_path = "../data/weather_data.csv"
 
-
-def save_weather_data(data):
-    """
-    Save fetched weather data into a CSV file in the project's /data folder.
-    Automatically creates the folder if missing.
-    """
-    # ✅ Always resolve path relative to project root
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_dir = os.path.join(base_dir, "data")
-    os.makedirs(data_dir, exist_ok=True)
-
-    filepath = os.path.join(data_dir, "weather_data.csv")
-
-    # ✅ Save or append
-    df = pd.DataFrame([data])
-    if os.path.exists(filepath):
-        df.to_csv(filepath, mode="a", header=False, index=False)
+    # Append or create
+    if os.path.exists(file_path):
+        df.to_csv(file_path, mode="a", header=False, index=False)
     else:
-        df.to_csv(filepath, index=False)
+        df.to_csv(file_path, index=False)
 
-    print(f"\n💾 Weather data saved successfully to {filepath}")
+    print(f"\n✅ Weather data saved to {file_path}")
+    return df

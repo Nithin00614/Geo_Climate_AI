@@ -2,12 +2,12 @@ import pandas as pd
 import pickle
 import os
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, r2_score
 
 def train_temperature_model(df):
     """
-    Train a linear regression model to predict temperature.
+    Train a Random Forest model to predict temperature.
     Saves the trained model as a .pkl file in the models folder.
     """
     if df is None or df.empty:
@@ -21,7 +21,11 @@ def train_temperature_model(df):
         X, y, test_size=0.2, random_state=42
     )
 
-    model = LinearRegression()
+    model = RandomForestRegressor(
+        n_estimators=150,
+        random_state=42,
+        max_depth=8
+    )
     model.fit(X_train, y_train)
 
     # Evaluate model
@@ -29,7 +33,7 @@ def train_temperature_model(df):
     mae = mean_absolute_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
 
-    # Save the trained model
+    # Save model
     model_dir = os.path.join(os.getcwd(), "models")
     os.makedirs(model_dir, exist_ok=True)
 
@@ -37,6 +41,8 @@ def train_temperature_model(df):
     with open(model_path, "wb") as f:
         pickle.dump(model, f)
 
-    print("💾 Model saved successfully!")
+    print("💾 Random Forest model saved successfully!")
+    print(f"📊 Mean Absolute Error: {mae:.2f}")
+    print(f"📈 R² Score: {r2:.2f}")
 
     return model, mae, r2

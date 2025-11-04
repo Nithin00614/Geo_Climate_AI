@@ -1,52 +1,34 @@
 import pandas as pd
 import os
 
-def get_data_path(filename="weather_data.csv"):
+def preprocess_data(df):
     """
-    Get the absolute path for any file inside the /data directory.
+    Clean and preprocess the weather dataset.
+    Removes duplicates, handles missing values, and ensures valid numeric types.
     """
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_dir = os.path.join(base_dir, "data")
-    os.makedirs(data_dir, exist_ok=True)
-    return os.path.join(data_dir, filename)
-
-def preprocess_weather_data():
-    """
-    Load, clean, and preprocess weather data for model training.
-    """
-    input_path = get_data_path("weather_data.csv")
-    output_path = get_data_path("weather_data_clean.csv")
-
-    if not os.path.exists(input_path):
-        print("❌ No data file found! Run the fetch step first.")
+    if df is None or df.empty:
+        print("⚠️ No data available for preprocessing.")
         return None
-
-    df = pd.read_csv(input_path)
-
-    if df.empty:
-        print("⚠️ The data file is empty.")
-        return None
-
-    print(f"\n📂 Loaded {len(df)} records from {input_path}")
 
     # Drop duplicates
-    df = df.drop_duplicates(subset=["city", "date_time"], keep="last")
+    df = df.drop_duplicates()
 
-    # Drop rows with missing values in essential columns
+    # Remove rows with missing values
     df = df.dropna(subset=["temperature", "humidity", "pressure", "wind_speed"])
 
-    # Convert date_time to datetime type if available
-    if "date_time" in df.columns:
-        df["date_time"] = pd.to_datetime(df["date_time"], errors="coerce")
+    # Ensure numeric types
+    df["temperature"] = pd.to_numeric(df["temperature"], errors="coerce")
+    df["humidity"] = pd.to_numeric(df["humidity"], errors="coerce")
+    df["pressure"] = pd.to_numeric(df["pressure"], errors="coerce")
+    df["wind_speed"] = pd.to_numeric(df["wind_speed"], errors="coerce")
 
-    # Sort data by date
-    df = df.sort_values(by="date_time", ascending=False)
+    # Drop invalid rows again after conversion
+    df = df.dropna()
 
-    # Save preprocessed data
-    df.to_csv(output_path, index=False)
-    print(f"✅ Preprocessed data saved successfully at: {output_path}")
+    # Save cleaned version to /data/weather_data_clean.csv
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    clean_path = os.path.join(base_dir, "data", "weather_data_clean.csv")
+    df.to_csv(clean_path, index=False)
+    print(f"✅ Cleaned data saved at: {clean_path}")
 
     return df
-
-if __name__ == "__main__":
-    preprocess_weather_data()

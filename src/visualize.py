@@ -1,53 +1,41 @@
-import pandas as pd
 import matplotlib.pyplot as plt
 import os
+from sklearn.linear_model import LinearRegression
+import numpy as np
 
-def get_data_path(filename="weather_data_clean.csv"):
-    """Get absolute path for any file in the /data directory."""
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    return os.path.join(base_dir, "data", filename)
+def plot_temperature_trends(df, save_path=None):
+    """Plot humidity/pressure vs temperature."""
+    plt.figure(figsize=(8, 5))
+    plt.scatter(df["humidity"], df["temperature"], color='b', label="Humidity vs Temp")
+    plt.scatter(df["pressure"], df["temperature"], color='r', label="Pressure vs Temp")
+    plt.title("Weather Data: Temperature Trends")
+    plt.xlabel("Humidity / Pressure")
+    plt.ylabel("Temperature (°C)")
+    plt.legend()
+    plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path)
+        print(f"💾 Saved: {save_path}")
+    plt.show()
 
-def plot_temperature_trends(df):
-    """
-    Plot temperature trends for each city from the cleaned dataset.
-    """
-    if df is None or df.empty:
-        print("⚠️ Not enough data to plot yet. Try fetching more samples.")
-        return
 
-    if "date_time" not in df.columns or "city" not in df.columns:
-        print("⚠️ Missing required columns for plotting.")
-        return
+def plot_actual_vs_predicted(df, save_path=None):
+    """Plot actual vs predicted temperature comparison."""
+    X = df[["humidity", "pressure", "wind_speed"]]
+    y = df["temperature"]
 
-    # Convert date_time to datetime if not already
-    df["date_time"] = pd.to_datetime(df["date_time"], errors="coerce")
+    model = LinearRegression()
+    model.fit(X, y)
+    predicted = model.predict(X)
 
-    # Create a folder to save plots
-    plots_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "plots")
-    os.makedirs(plots_dir, exist_ok=True)
-
-    # Plot temperature trend for each city
-    cities = df["city"].unique()
-    for city in cities:
-        city_df = df[df["city"] == city].sort_values("date_time")
-        plt.figure(figsize=(8, 4))
-        plt.plot(city_df["date_time"], city_df["temperature"], marker="o", linestyle="-")
-        plt.title(f"🌡️ Temperature Trend for {city}")
-        plt.xlabel("Date")
-        plt.ylabel("Temperature (°C)")
-        plt.grid(True)
-        plt.tight_layout()
-
-        plot_path = os.path.join(plots_dir, f"{city}_trend.png")
-        plt.savefig(plot_path)
-        plt.close()
-
-    print(f"✅ Temperature trend plots saved in: {plots_dir}")
-
-if __name__ == "__main__":
-    data_path = get_data_path()
-    if os.path.exists(data_path):
-        df = pd.read_csv(data_path)
-        plot_temperature_trends(df)
-    else:
-        print("❌ No cleaned data file found! Run the fetch & preprocess steps first.")
+    plt.figure(figsize=(8, 5))
+    plt.scatter(y, predicted, color="purple", alpha=0.6)
+    plt.xlabel("Actual Temperature (°C)")
+    plt.ylabel("Predicted Temperature (°C)")
+    plt.title("Actual vs Predicted Temperature")
+    plt.plot([y.min(), y.max()], [y.min(), y.max()], "k--", lw=2)
+    plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path)
+        print(f"💾 Saved: {save_path}")
+    plt.show()
