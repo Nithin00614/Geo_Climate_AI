@@ -32,3 +32,24 @@ def preprocess_data(df):
     print(f"✅ Cleaned data saved at: {clean_path}")
 
     return df
+
+def preprocess_weather_data(df):
+    """
+    Cleans and preprocesses the weather data for model training and prediction.
+    """
+    import pandas as pd
+    from sklearn.preprocessing import StandardScaler
+
+    df = df.copy()
+    df.dropna(inplace=True)
+    
+    # Ensure required columns exist
+    expected_cols = ['temperature', 'humidity', 'pressure', 'wind_speed']
+    for col in expected_cols:
+        if col not in df.columns:
+            raise ValueError(f"Missing column: {col}")
+
+    scaler = StandardScaler()
+    df[expected_cols] = scaler.fit_transform(df[expected_cols])
+
+    return df, scaler

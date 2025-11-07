@@ -1,60 +1,72 @@
 import streamlit as st
 import pandas as pd
 import os
-from lstm_model import train_lstm_model, predict_next_7_days
-from data_loader import load_weather_data
-from preprocess import preprocess_weather_data
+from lstm_model import train_lstm_model, predict_next_7_days, auto_train_all_cities
+from weather_fetcher import fetch_weather_data
+import joblib
+import plotly.express as px
 
+st.set_page_config(page_title="🌦️ GeoClimate AI Dashboard", layout="wide")
+st.title("🌍 GeoClimate AI — Smart Climate Forecasting")
 
-st.set_page_config(page_title="GeoClimate AI", page_icon="🌍", layout="wide")
+DATA_PATH = "data/weather_data.csv"
+os.makedirs("data", exist_ok=True)
+os.makedirs("models", exist_ok=True)
 
-st.title("🌦️ GeoClimate AI — Advanced Weather Forecasting (LSTM Model)")
-
-# Section: City Input
-st.sidebar.header("🌆 Choose Location")
-city = st.sidebar.text_input("Enter City Name", "Delhi")
-
-# Fetch or load data
-data_path = os.path.join("data", "weather_data.csv")
-if os.path.exists(data_path):
-    df = pd.read_csv(data_path)
+# --- Load or fetch data ---
+if not os.path.exists(DATA_PATH):
+    st.warning("⚠️ No data found — fetching sample city weather data...")
+    df = fetch_weather_data("bengaluru")
 else:
-    st.warning("Weather data not found locally. Fetching new data...")
-    df = fetch_weather_data(city)
-    if df is not None:
-        os.makedirs("data", exist_ok=True)
-        df.to_csv(data_path, index=False)
+    df = pd.read_csv(DATA_PATH)
 
 if df is not None:
-    st.write(f"### 📈 Showing weather data for **{city}**")
-    st.dataframe(df.tail(10))
-
-    # Model training button
-    if st.button("🔁 Train / Retrain LSTM Model"):
-        with st.spinner("Training LSTM model..."):
-            model, scaler = train_lstm_model(df, city)
-        if model is not None:
-            st.success("✅ Model trained successfully and saved in /models!")
-        else:
-            st.error("⚠️ Training failed. Try using a city with more data points.")
-
-    # Forecast button
-    if st.button("🌤️ Predict Next 7 Days"):
-        model_path = "models/lstm_temperature_model.keras"
-        scaler_path = "models/scaler.pkl"
-
-        if not os.path.exists(model_path) or not os.path.exists(scaler_path):
-            st.warning("⚠️ LSTM model or scaler not found! Train your model first.")
-        else:
-            with st.spinner("Generating 7-day forecast..."):
-                preds = predict_next_7_days(df, city)
-            if preds is not None:
-                st.success("✅ 7-Day Forecast Ready!")
-                forecast_df = pd.DataFrame({
-                    "Date": pd.date_range(datetime.now(), periods=7, freq="D"),
-                    "Predicted Temperature (°C)": preds
-                })
-                st.line_chart(forecast_df.set_index("Date"))
-                st.dataframe(forecast_df)
+    st.success(f"✅ Loaded data for {len(df['city'].unique())} cities.")
 else:
-    st.error("❌ Unable to load data. Please verify your city or API setup.")
+    st.error("❌ Could not load any data.")
+    st.stop()
+
+cities = sorted(df["city"].unique())
+selected_city = st.selectbox("🏙️ Choose a city", cities)
+
+col1, col2, col3 = st.columns(3)
+
+# --- Train for selected city ---
+with col1:
+    if st.button("🚀 Train Model for Selected City"):
+        model, scaler = train_lstm_model(df, selected_city)
+        if model:
+            st.success(f"✅ Model trained for {selected_city}!")
+        else:
+            st.error(f"❌ Could not train model for {selected_city}.")
+
+# --- Auto-train for all cities ---
+with col2:
+    if st.button("🤖 Auto-Train All Cities"):
+        auto_train_all_cities(df)
+        st.success("✅ All city models trained successfully!")
+
+# --- Fetch real-time updates ---
+with col3:
+    if st.button("🌤️ Refresh Weather Data"):
+        fetch_weather_data(selected_city)
+        st.success("✅ Real-time data refreshed!")
+
+# --- Forecast Section ---
+st.subheader(f"📈 7-Day AI Forecast for {selected_city}")
+model_path = f"models/lstm_{selected_city.lower()}.keras"
+scaler_path = f"models/scaler_{selected_city.lower()}.pkl"
+
+if os.path.exists(model_path) and os.path.exists(scaler_path):
+    scaler = joblib.load(scaler_path)
+    forecast = predict_next_7_days(df, selected_city, scaler)
+
+    if forecast is not None:
+        fig = px.line(forecast, x="date", y="predicted_temperature",
+                      title=f"🌡️ 7-Day Predicted Temperature for {selected_city}",
+                      markers=True)
+        st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.warning("⚠️ Forecast could not be generated.")
+else:
+    st.warning("⚠️ LSTM model or scaler not found! Please train your model before forecasting.")
