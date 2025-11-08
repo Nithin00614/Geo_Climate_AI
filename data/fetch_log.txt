@@ -1,0 +1,28 @@
+🌍 Starting data pipeline...
+
+==================================================
+✅ Chennai: 2557 rows fetched successfully.
+✅ Bengaluru: 2557 rows fetched successfully.
+✅ Delhi: 2557 rows fetched successfully.
+✅ Mumbai: 2557 rows fetched successfully.
+✅ Kolkata: 2557 rows fetched successfully.
+✅ Hyderabad: 2557 rows fetched successfully.
+✅ Pune: 2557 rows fetched successfully.
+✅ Ahmedabad: 2557 rows fetched successfully.
+✅ Jaipur: 2557 rows fetched successfully.
+✅ Lucknow: 2557 rows fetched successfully.
+✅ Coimbatore: 2557 rows fetched successfully.
+⚠️ Kochi: No data returned or skipped.
+⚠️ Patna: No data returned or skipped.
+⚠️ Bhopal: No data returned or skipped.
+⚠️ Visakhapatnam: No data returned or skipped.
+⚠️ Indore: No data returned or skipped.
+⚠️ Nagpur: No data returned or skipped.
+⚠️ Chandigarh: No data returned or skipped.
+✅ Surat: 2557 rows fetched successfully.
+✅ Madurai: 2557 rows fetched successfully.
+
+🔄 Combining and saving valid data...
+✅ Pipeline completed successfully! Total rows: 33241
+==================================================
+

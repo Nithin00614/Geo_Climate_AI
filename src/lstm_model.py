@@ -1,120 +1,161 @@
+import os
 import numpy as np
 import pandas as pd
-import os
 import joblib
-from tensorflow.keras.models import Sequential, load_model
-from tensorflow.keras.layers import LSTM, Dense
+from keras.models import Sequential, load_model
+from keras.layers import LSTM, Dense, Dropout
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.metrics import mean_absolute_error, r2_score
+from datetime import timedelta
 
-def train_lstm_model(df, city):
+# -------------------------------
+# CONFIG
+# -------------------------------
+TIME_STEPS = 30
+FEATURES = ["temp_max", "temp_min", "rainfall"]
+
+
+# -------------------------------
+# TRAINING FUNCTION (MULTI-FEATURE LSTM)
+# -------------------------------
+def train_multifeature_lstm(city, force_retrain=False):
     """
-    Train an LSTM model for the selected city and save model + scaler.
+    Trains an LSTM model for a specific city using multiple weather features.
+    If model already exists, skips training unless force_retrain=True.
     """
-    city_data = df[df["city"].str.lower() == city.lower()].copy()
-    if "date_time" in city_data.columns:
-        city_data.rename(columns={"date_time": "date"}, inplace=True)
-
-    city_data = city_data.sort_values("date")
-    values = city_data[["temperature", "humidity", "pressure", "wind_speed"]].values
-
-    # Normalize
-    scaler = MinMaxScaler()
-    scaled = scaler.fit_transform(values)
-
-    # Create sequences (lookback = 3)
-    X, y = [], []
-    for i in range(3, len(scaled)):
-        X.append(scaled[i - 3:i])
-        y.append(scaled[i, 0])
-    X, y = np.array(X), np.array(y)
-
-    if len(X) == 0:
-        print(f"⚠️ Not enough data to train for {city}")
-        return None, None
-
-    # Build model
-    model = Sequential([
-        LSTM(64, activation='relu', input_shape=(X.shape[1], X.shape[2])),
-        Dense(32, activation='relu'),
-        Dense(1)
-    ])
-    model.compile(optimizer="adam", loss="mse")
-    model.fit(X, y, epochs=50, batch_size=8, verbose=0)
-
-    # Save model and scaler
-    os.makedirs("models", exist_ok=True)
     model_path = f"models/lstm_{city.lower()}.keras"
     scaler_path = f"models/scaler_{city.lower()}.pkl"
 
+    # ✅ Skip retraining if already exists (unless forced)
+    if not force_retrain and os.path.exists(model_path) and os.path.exists(scaler_path):
+        print(f"⚙️ Model for {city} already exists — skipping retrain.")
+        return None, None
+
+    data_path = "data/historical_combined.csv"
+    if not os.path.exists(data_path):
+        print("❌ Dataset not found. Please run the data pipeline first.")
+        return None, None
+
+    df = pd.read_csv(data_path)
+    df = df[df["city"] == city].copy()
+    df["date"] = pd.to_datetime(df["date"])
+    df.sort_values("date", inplace=True)
+
+    if len(df) < TIME_STEPS + 1:
+        print(f"⚠️ Not enough data to train model for {city}.")
+        return None, None
+
+    data = df[FEATURES]
+    scaler = MinMaxScaler()
+    scaled_data = scaler.fit_transform(data)
+
+    X, y = [], []
+    for i in range(TIME_STEPS, len(scaled_data)):
+        X.append(scaled_data[i - TIME_STEPS:i])
+        y.append(scaled_data[i, 0])  # target = temp_max
+
+    X, y = np.array(X), np.array(y)
+
+    model = Sequential([
+        LSTM(64, return_sequences=True, input_shape=(X.shape[1], X.shape[2])),
+        Dropout(0.2),
+        LSTM(32),
+        Dense(1)
+    ])
+    model.compile(optimizer="adam", loss="mse")
+
+    model.fit(X, y, epochs=25, batch_size=16, verbose=1)
+
+    os.makedirs("models", exist_ok=True)
     model.save(model_path)
     joblib.dump(scaler, scaler_path)
 
-    print(f"✅ Saved model to {model_path}")
-    print(f"✅ Saved scaler to {scaler_path}")
-
-    # Evaluate
-    preds = model.predict(X)
-    mae = mean_absolute_error(y, preds)
-    r2 = r2_score(y, preds)
-    print(f"📊 {city} → MAE: {mae:.2f}, R²: {r2:.2f}")
-
+    print(f"✅ Trained and saved model for {city}")
     return model, scaler
 
 
-def predict_next_7_days(df, city, scaler):
+# -------------------------------
+# FORECAST FUNCTION
+# -------------------------------
+def predict_next_7_days(df, city, scaler=None):
     """
-    Predict next 7 days of temperature for the selected city using trained LSTM.
+    Predicts the next 7 days of temperature for a given city using trained LSTM.
     """
-    city_data = df[df["city"].str.lower() == city.lower()].copy()
-    if "date_time" in city_data.columns:
-        city_data.rename(columns={"date_time": "date"}, inplace=True)
-
-    city_data = city_data.sort_values("date")
-    recent_data = city_data[["temperature", "humidity", "pressure", "wind_speed"]].tail(3).values
-
-    scaled = scaler.transform(recent_data)
-    X_input = np.expand_dims(scaled, axis=0)
-
     model_path = f"models/lstm_{city.lower()}.keras"
-    if not os.path.exists(model_path):
-        print(f"⚠️ Model not found for {city}")
+    scaler_path = f"models/scaler_{city.lower()}.pkl"
+
+    if not (os.path.exists(model_path) and os.path.exists(scaler_path)):
+        print(f"⚠️ Model or scaler missing for {city}. Train the model first.")
         return None
 
     model = load_model(model_path)
+    scaler = joblib.load(scaler_path)
 
-    preds, forecast_dates = [], pd.date_range(start=pd.to_datetime(city_data["date"].iloc[-1]), periods=8, freq="D")[1:]
-    input_seq = X_input.copy()
+    city_df = df[df["city"] == city].copy()
+    city_df["date"] = pd.to_datetime(city_df["date"])
+    city_df.sort_values("date", inplace=True)
 
+    scaled = scaler.transform(city_df[FEATURES])
+    last_seq = scaled[-TIME_STEPS:]
+
+    predictions = []
     for _ in range(7):
-        next_pred = model.predict(input_seq)[0][0]
-        preds.append(next_pred)
+        pred = model.predict(np.expand_dims(last_seq, axis=0), verbose=0)[0][0]
+        # simulate next input by shifting window
+        new_row = np.append(last_seq[-1, 1:], pred)
+        last_seq = np.vstack([last_seq[1:], new_row])
+        predictions.append(pred)
 
-        next_input = np.array([[next_pred, *input_seq[0, -1, 1:]]])
-        input_seq = np.append(input_seq[:, 1:, :], np.expand_dims(next_input, axis=1), axis=1)
+    dummy = np.zeros((len(predictions), len(FEATURES)))
+    dummy[:, 0] = predictions
+    forecast_temp = scaler.inverse_transform(dummy)[:, 0]
 
-    forecast_scaled = np.zeros((len(preds), scaled.shape[1]))
-    forecast_scaled[:, 0] = preds
-    forecast = scaler.inverse_transform(forecast_scaled)
-
-    result = pd.DataFrame({
-        "date": forecast_dates,
-        "predicted_temperature": forecast[:, 0]
+    future_dates = pd.date_range(city_df["date"].max() + timedelta(days=1), periods=7)
+    forecast_df = pd.DataFrame({
+        "date": future_dates,
+        "predicted_temperature": forecast_temp
     })
-    return result
+    return forecast_df
 
-    from tqdm import tqdm
 
+# -------------------------------
+# AUTO TRAIN FOR ALL CITIES
+# -------------------------------
 def auto_train_all_cities(df):
     """
-    Automatically trains and saves LSTM models for all cities in the dataset.
+    Trains LSTM models for all cities that don't already have a saved model.
     """
-    cities = df["city"].unique()
-    print(f"🚀 Auto-training models for {len(cities)} cities...")
-    for city in tqdm(cities):
-        try:
-            train_lstm_model(df, city)
-        except Exception as e:
-            print(f"⚠️ Skipped {city}: {e}")
-    print("✅ All available city models trained and saved.")
+    if df is None or df.empty:
+        print("❌ No data provided for auto-training.")
+        return
 
+    cities = sorted(df["city"].unique())
+    for city in cities:
+        try:
+            model_path = f"models/lstm_{city.lower()}.keras"
+            scaler_path = f"models/scaler_{city.lower()}.pkl"
+            if os.path.exists(model_path) and os.path.exists(scaler_path):
+                print(f"⚙️ Skipping {city} — model already exists.")
+                continue
+
+            print(f"🔄 Training model for {city}...")
+            train_multifeature_lstm(city)
+        except Exception as e:
+            print(f"❌ Error training {city}: {e}")
+
+    print("✅ Auto-training complete for all missing cities!")
+
+
+# -------------------------------
+# MANUAL TEST ENTRY POINT
+# -------------------------------
+if __name__ == "__main__":
+    data_path = "data/historical_combined.csv"
+    if not os.path.exists(data_path):
+        print("❌ Dataset not found. Please run the data pipeline first.")
+    else:
+        df = pd.read_csv(data_path)
+        sample_city = df["city"].unique()[0]
+        print(f"🧠 Testing LSTM model for {sample_city}")
+        train_multifeature_lstm(sample_city, force_retrain=True)
+        forecast = predict_next_7_days(df, sample_city)
+        print(forecast)

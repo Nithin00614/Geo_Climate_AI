@@ -1,0 +1,146 @@
+2025-11-08 16:39:55 | Mumbai | Heatwave | 🔥 Heatwave alert in Mumbai: sensor 34.45°C exceeds AI mean by 5.13°C
+2025-11-08 16:40:16 | Mumbai | Heatwave | 🔥 Heatwave alert in Mumbai: sensor 38.18°C exceeds AI mean by 8.86°C
+2025-11-08 16:40:19 | Mumbai | Heatwave | 🔥 Heatwave alert in Mumbai: sensor 36.17°C exceeds AI mean by 6.85°C
+2025-11-08 16:40:31 | Mumbai | Heatwave | 🔥 Heatwave alert in Mumbai: sensor 40.35°C exceeds AI mean by 11.03°C
+2025-11-08 16:40:58 | Mumbai | Heatwave | 🔥 Heatwave alert in Mumbai: sensor 36.14°C exceeds AI mean by 6.82°C
+2025-11-08 16:41:04 | Mumbai | Heatwave | 🔥 Heatwave alert in Mumbai: sensor 36.32°C exceeds AI mean by 7.00°C
+2025-11-08 16:41:07 | Mumbai | Heatwave | 🔥 Heatwave alert in Mumbai: sensor 39.34°C exceeds AI mean by 10.02°C
+2025-11-08 16:41:10 | Mumbai | Heatwave | 🔥 Heatwave alert in Mumbai: sensor 34.47°C exceeds AI mean by 5.15°C
+2025-11-08 16:41:13 | Mumbai | Heatwave | 🔥 Heatwave alert in Mumbai: sensor 37.21°C exceeds AI mean by 7.89°C
+2025-11-08 16:41:16 | Mumbai | Heatwave | 🔥 Heatwave alert in Mumbai: sensor 35.3°C exceeds AI mean by 5.98°C
+2025-11-08 16:41:22 | Mumbai | Heatwave | 🔥 Heatwave alert in Mumbai: sensor 37.3°C exceeds AI mean by 7.98°C
+2025-11-08 16:41:40 | Mumbai | Heatwave | 🔥 Heatwave alert in Mumbai: sensor 34.58°C exceeds AI mean by 5.26°C
+2025-11-08 16:42:07 | Mumbai | Heatwave | 🔥 Heatwave alert in Mumbai: sensor 38.53°C exceeds AI mean by 9.21°C
+2025-11-08 16:42:10 | Mumbai | Heatwave | 🔥 Heatwave alert in Mumbai: sensor 38.44°C exceeds AI mean by 9.12°C
+2025-11-08 17:49:21 | Pune | Heatwave | 🔥 Heatwave alert in Pune: sensor 38.56°C exceeds AI mean by 9.96°C
+2025-11-08 17:49:21 | Pune | Rainfall | 🌧️ Heavy rainfall alert in Pune: 9.01 mm
+2025-11-08 17:49:23 | Pune | Heatwave | 🔥 Heatwave alert in Pune: sensor 35.78°C exceeds AI mean by 7.18°C
+2025-11-08 17:49:23 | Pune | Rainfall | 🌧️ Heavy rainfall alert in Pune: 10.12 mm
+2025-11-08 17:49:23 | Pune | LowHumidity | ⚠️ Very low humidity in Pune: 38.08%
+2025-11-08 17:49:24 | Pune | Heatwave | 🔥 Heatwave alert in Pune: sensor 39.76°C exceeds AI mean by 11.16°C
+2025-11-08 17:49:26 | Pune | Rainfall | 🌧️ Heavy rainfall alert in Pune: 6.0 mm
+2025-11-08 17:49:26 | Pune | LowHumidity | ⚠️ Very low humidity in Pune: 39.13%
+2025-11-08 17:49:28 | Pune | Heatwave | 🔥 Heatwave alert in Pune: sensor 31.94°C exceeds AI mean by 3.34°C
+2025-11-08 17:49:28 | Pune | Rainfall | 🌧️ Heavy rainfall alert in Pune: 5.06 mm
+2025-11-08 17:49:29 | Pune | Heatwave | 🔥 Heatwave alert in Pune: sensor 32.92°C exceeds AI mean by 4.32°C
+2025-11-08 17:49:30 | Pune | Rainfall | 🌧️ Heavy rainfall alert in Pune: 12.79 mm
+2025-11-08 17:49:33 | Pune | Heatwave | 🔥 Heatwave alert in Pune: sensor 32.87°C exceeds AI mean by 4.27°C
+2025-11-08 17:49:34 | Pune | Heatwave | 🔥 Heatwave alert in Pune: sensor 32.86°C exceeds AI mean by 4.26°C
+2025-11-08 17:49:34 | Pune | Rainfall | 🌧️ Heavy rainfall alert in Pune: 11.86 mm
+2025-11-08 17:49:36 | Pune | Heatwave | 🔥 Heatwave alert in Pune: sensor 35.47°C exceeds AI mean by 6.87°C
+2025-11-08 17:49:37 | Pune | Heatwave | 🔥 Heatwave alert in Pune: sensor 35.03°C exceeds AI mean by 6.43°C
+2025-11-08 17:49:40 | Pune | Heatwave | 🔥 Heatwave alert in Pune: sensor 32.33°C exceeds AI mean by 3.73°C
+2025-11-08 17:49:42 | Pune | Heatwave | 🔥 Heatwave alert in Pune: sensor 31.58°C exceeds AI mean by 2.98°C
+2025-11-08 17:49:43 | Pune | Heatwave | 🔥 Heatwave alert in Pune: sensor 37.8°C exceeds AI mean by 9.20°C
+2025-11-08 17:49:43 | Pune | LowHumidity | ⚠️ Very low humidity in Pune: 36.13%
+2025-11-08 17:49:44 | Pune | Heatwave | 🔥 Heatwave alert in Pune: sensor 40.36°C exceeds AI mean by 11.76°C
+2025-11-08 17:49:45 | Pune | Heatwave | 🔥 Heatwave alert in Pune: sensor 35.29°C exceeds AI mean by 6.69°C
+2025-11-08 17:49:45 | Pune | Rainfall | 🌧️ Heavy rainfall alert in Pune: 5.91 mm
+2025-11-08 18:02:06 | Jaipur | Rainfall | 🌧️ Heavy rainfall alert in Jaipur: 7.09 mm
+2025-11-08 18:02:07 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 31.44°C exceeds AI mean by 13.01°C
+2025-11-08 18:02:07 | Jaipur | Rainfall | 🌧️ Heavy rainfall alert in Jaipur: 8.72 mm
+2025-11-08 18:02:08 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 40.06°C exceeds AI mean by 21.63°C
+2025-11-08 18:02:08 | Jaipur | Rainfall | 🌧️ Heavy rainfall alert in Jaipur: 8.34 mm
+2025-11-08 18:02:09 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 29.96°C exceeds AI mean by 11.53°C
+2025-11-08 18:02:10 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 28.59°C exceeds AI mean by 10.16°C
+2025-11-08 18:02:11 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 28.02°C exceeds AI mean by 9.59°C
+2025-11-08 18:02:12 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 28.47°C exceeds AI mean by 10.04°C
+2025-11-08 18:02:12 | Jaipur | Rainfall | 🌧️ Heavy rainfall alert in Jaipur: 12.42 mm
+2025-11-08 18:02:13 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 40.32°C exceeds AI mean by 21.89°C
+2025-11-08 18:02:13 | Jaipur | Rainfall | 🌧️ Heavy rainfall alert in Jaipur: 15.04 mm
+2025-11-08 18:02:14 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 33.84°C exceeds AI mean by 15.41°C
+2025-11-08 18:02:15 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 27.68°C exceeds AI mean by 9.25°C
+2025-11-08 18:02:15 | Jaipur | Rainfall | 🌧️ Heavy rainfall alert in Jaipur: 13.87 mm
+2025-11-08 18:02:17 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 20.73°C exceeds AI mean by 2.30°C
+2025-11-08 18:02:18 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 26.38°C exceeds AI mean by 7.95°C
+2025-11-08 18:02:18 | Jaipur | LowHumidity | ⚠️ Very low humidity in Jaipur: 38.21%
+2025-11-08 18:02:19 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 21.9°C exceeds AI mean by 3.47°C
+2025-11-08 18:02:20 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 37.6°C exceeds AI mean by 19.17°C
+2025-11-08 18:02:20 | Jaipur | Rainfall | 🌧️ Heavy rainfall alert in Jaipur: 6.14 mm
+2025-11-08 18:02:20 | Jaipur | LowHumidity | ⚠️ Very low humidity in Jaipur: 32.86%
+2025-11-08 18:02:21 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 23.4°C exceeds AI mean by 4.97°C
+2025-11-08 18:02:22 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 21.04°C exceeds AI mean by 2.61°C
+2025-11-08 18:02:22 | Jaipur | Rainfall | 🌧️ Heavy rainfall alert in Jaipur: 14.07 mm
+2025-11-08 18:02:23 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 28.13°C exceeds AI mean by 9.70°C
+2025-11-08 18:02:23 | Jaipur | Rainfall | 🌧️ Heavy rainfall alert in Jaipur: 6.29 mm
+2025-11-08 18:02:24 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 22.38°C exceeds AI mean by 3.95°C
+2025-11-08 18:02:25 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 28.12°C exceeds AI mean by 9.69°C
+2025-11-08 18:02:26 | Jaipur | Rainfall | 🌧️ Heavy rainfall alert in Jaipur: 6.08 mm
+2025-11-08 18:02:28 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 32.38°C exceeds AI mean by 13.95°C
+2025-11-08 18:02:28 | Jaipur | Rainfall | 🌧️ Heavy rainfall alert in Jaipur: 17.88 mm
+2025-11-08 18:02:30 | Jaipur | Heatwave | 🔥 Heatwave alert in Jaipur: sensor 22.34°C exceeds AI mean by 3.91°C
+2025-11-08 18:02:31 | Jaipur | Rainfall | 🌧️ Heavy rainfall alert in Jaipur: 7.5 mm
+2025-11-08 18:04:10 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 39.69°C exceeds AI mean by 13.94°C
+2025-11-08 18:04:11 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 38.97°C exceeds AI mean by 13.22°C
+2025-11-08 18:04:12 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 37.9°C exceeds AI mean by 12.15°C
+2025-11-08 18:04:15 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 33.92°C exceeds AI mean by 8.17°C
+2025-11-08 18:04:15 | Bengaluru | LowHumidity | ⚠️ Very low humidity in Bengaluru: 34.5%
+2025-11-08 18:04:16 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 31.45°C exceeds AI mean by 5.70°C
+2025-11-08 18:04:16 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 6.44 mm
+2025-11-08 18:04:17 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 8.12 mm
+2025-11-08 18:04:18 | Bengaluru | LowHumidity | ⚠️ Very low humidity in Bengaluru: 30.07%
+2025-11-08 18:04:19 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 37.83°C exceeds AI mean by 12.08°C
+2025-11-08 18:04:19 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 15.39 mm
+2025-11-08 18:04:21 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 35.94°C exceeds AI mean by 10.19°C
+2025-11-08 18:04:23 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 31.99°C exceeds AI mean by 6.24°C
+2025-11-08 18:04:24 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 38.35°C exceeds AI mean by 12.60°C
+2025-11-08 18:04:25 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 27.8°C exceeds AI mean by 2.05°C
+2025-11-08 18:04:25 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 17.36 mm
+2025-11-08 18:04:26 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 35.6°C exceeds AI mean by 9.85°C
+2025-11-08 18:04:26 | Bengaluru | LowHumidity | ⚠️ Very low humidity in Bengaluru: 36.93%
+2025-11-08 18:04:27 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 32.89°C exceeds AI mean by 7.14°C
+2025-11-08 18:04:30 | Bengaluru | LowHumidity | ⚠️ Very low humidity in Bengaluru: 37.83%
+2025-11-08 18:04:31 | Bengaluru | LowHumidity | ⚠️ Very low humidity in Bengaluru: 36.75%
+2025-11-08 18:04:32 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 9.58 mm
+2025-11-08 18:04:33 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 30.2°C exceeds AI mean by 4.45°C
+2025-11-08 18:04:34 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 11.28 mm
+2025-11-08 18:04:34 | Bengaluru | LowHumidity | ⚠️ Very low humidity in Bengaluru: 34.32%
+2025-11-08 18:10:36 | Chennai | LowHumidity | ⚠️ Very low humidity in Chennai: 35.56%
+2025-11-08 18:10:37 | Chennai | Rainfall | 🌧️ Heavy rainfall alert in Chennai: 6.05 mm
+2025-11-08 18:10:38 | Chennai | Heatwave | 🔥 Heatwave alert in Chennai: sensor 39.31°C exceeds AI mean by 10.97°C
+2025-11-08 18:10:38 | Chennai | Rainfall | 🌧️ Heavy rainfall alert in Chennai: 9.45 mm
+2025-11-08 18:10:39 | Chennai | Heatwave | 🔥 Heatwave alert in Chennai: sensor 40.76°C exceeds AI mean by 12.42°C
+2025-11-08 18:10:41 | Chennai | Rainfall | 🌧️ Heavy rainfall alert in Chennai: 27.02 mm
+2025-11-08 18:10:42 | Chennai | Rainfall | 🌧️ Heavy rainfall alert in Chennai: 7.45 mm
+2025-11-08 18:10:43 | Chennai | Heatwave | 🔥 Heatwave alert in Chennai: sensor 33.11°C exceeds AI mean by 4.77°C
+2025-11-08 18:10:45 | Chennai | Heatwave | 🔥 Heatwave alert in Chennai: sensor 36.64°C exceeds AI mean by 8.30°C
+2025-11-08 18:10:45 | Chennai | Rainfall | 🌧️ Heavy rainfall alert in Chennai: 7.57 mm
+2025-11-08 18:10:45 | Chennai | LowHumidity | ⚠️ Very low humidity in Chennai: 36.98%
+2025-11-08 18:10:46 | Chennai | Heatwave | 🔥 Heatwave alert in Chennai: sensor 41.92°C exceeds AI mean by 13.58°C
+2025-11-08 18:10:48 | Chennai | Rainfall | 🌧️ Heavy rainfall alert in Chennai: 12.63 mm
+2025-11-08 18:10:48 | Chennai | LowHumidity | ⚠️ Very low humidity in Chennai: 32.15%
+2025-11-08 18:10:50 | Chennai | Rainfall | 🌧️ Heavy rainfall alert in Chennai: 9.69 mm
+2025-11-08 18:10:52 | Chennai | Heatwave | 🔥 Heatwave alert in Chennai: sensor 33.55°C exceeds AI mean by 5.21°C
+2025-11-08 18:10:52 | Chennai | Rainfall | 🌧️ Heavy rainfall alert in Chennai: 7.52 mm
+2025-11-08 18:10:53 | Chennai | Heatwave | 🔥 Heatwave alert in Chennai: sensor 38.4°C exceeds AI mean by 10.06°C
+2025-11-08 18:10:54 | Chennai | Heatwave | 🔥 Heatwave alert in Chennai: sensor 38.45°C exceeds AI mean by 10.11°C
+2025-11-08 18:10:54 | Chennai | Rainfall | 🌧️ Heavy rainfall alert in Chennai: 15.82 mm
+2025-11-08 18:10:57 | Chennai | Rainfall | 🌧️ Heavy rainfall alert in Chennai: 6.9 mm
+2025-11-08 18:10:59 | Chennai | Rainfall | 🌧️ Heavy rainfall alert in Chennai: 12.58 mm
+2025-11-08 18:11:00 | Chennai | Heatwave | 🔥 Heatwave alert in Chennai: sensor 37.94°C exceeds AI mean by 9.60°C
+2025-11-08 18:11:00 | Chennai | Rainfall | 🌧️ Heavy rainfall alert in Chennai: 6.34 mm
+2025-11-08 18:24:28 | Ahmedabad | Heatwave | 🔥 Heatwave alert in Ahmedabad: sensor 39.39°C exceeds AI mean by 12.13°C
+2025-11-08 18:24:28 | Ahmedabad | LowHumidity | ⚠️ Very low humidity in Ahmedabad: 30.43%
+2025-11-08 18:24:30 | Ahmedabad | Heatwave | 🔥 Heatwave alert in Ahmedabad: sensor 35.48°C exceeds AI mean by 8.22°C
+2025-11-08 18:24:34 | Ahmedabad | Heatwave | 🔥 Heatwave alert in Ahmedabad: sensor 34.51°C exceeds AI mean by 7.25°C
+2025-11-08 18:24:34 | Ahmedabad | Rainfall | 🌧️ Heavy rainfall alert in Ahmedabad: 9.44 mm
+2025-11-08 18:24:35 | Ahmedabad | Heatwave | 🔥 Heatwave alert in Ahmedabad: sensor 35.98°C exceeds AI mean by 8.72°C
+2025-11-08 18:24:35 | Ahmedabad | Rainfall | 🌧️ Heavy rainfall alert in Ahmedabad: 12.9 mm
+2025-11-08 18:24:36 | Ahmedabad | Heatwave | 🔥 Heatwave alert in Ahmedabad: sensor 29.55°C exceeds AI mean by 2.29°C
+2025-11-08 18:24:36 | Ahmedabad | Rainfall | 🌧️ Heavy rainfall alert in Ahmedabad: 5.62 mm
+2025-11-08 18:24:37 | Ahmedabad | Heatwave | 🔥 Heatwave alert in Ahmedabad: sensor 41.05°C exceeds AI mean by 13.79°C
+2025-11-08 18:24:37 | Ahmedabad | Rainfall | 🌧️ Heavy rainfall alert in Ahmedabad: 14.2 mm
+2025-11-08 18:24:39 | Ahmedabad | Heatwave | 🔥 Heatwave alert in Ahmedabad: sensor 41.97°C exceeds AI mean by 14.71°C
+2025-11-08 18:24:39 | Ahmedabad | Rainfall | 🌧️ Heavy rainfall alert in Ahmedabad: 10.95 mm
+2025-11-08 18:24:40 | Ahmedabad | Rainfall | 🌧️ Heavy rainfall alert in Ahmedabad: 14.38 mm
+2025-11-08 18:24:41 | Ahmedabad | Rainfall | 🌧️ Heavy rainfall alert in Ahmedabad: 9.91 mm
+2025-11-08 18:24:42 | Ahmedabad | Heatwave | 🔥 Heatwave alert in Ahmedabad: sensor 30.1°C exceeds AI mean by 2.84°C
+2025-11-08 18:24:43 | Ahmedabad | Rainfall | 🌧️ Heavy rainfall alert in Ahmedabad: 16.75 mm
+2025-11-08 18:24:44 | Ahmedabad | Heatwave | 🔥 Heatwave alert in Ahmedabad: sensor 36.44°C exceeds AI mean by 9.18°C
+2025-11-08 18:24:45 | Ahmedabad | Heatwave | 🔥 Heatwave alert in Ahmedabad: sensor 34.16°C exceeds AI mean by 6.90°C
+2025-11-08 18:24:46 | Ahmedabad | Heatwave | 🔥 Heatwave alert in Ahmedabad: sensor 38.02°C exceeds AI mean by 10.76°C
+2025-11-08 18:24:48 | Ahmedabad | Rainfall | 🌧️ Heavy rainfall alert in Ahmedabad: 6.83 mm
+2025-11-08 18:24:49 | Ahmedabad | Rainfall | 🌧️ Heavy rainfall alert in Ahmedabad: 10.37 mm
+2025-11-08 18:24:51 | Ahmedabad | Heatwave | 🔥 Heatwave alert in Ahmedabad: sensor 41.13°C exceeds AI mean by 13.87°C
+2025-11-08 18:24:51 | Ahmedabad | Rainfall | 🌧️ Heavy rainfall alert in Ahmedabad: 8.96 mm
+2025-11-08 18:24:52 | Ahmedabad | Rainfall | 🌧️ Heavy rainfall alert in Ahmedabad: 16.93 mm

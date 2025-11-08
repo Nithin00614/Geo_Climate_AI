@@ -38,3 +38,12 @@ def fetch_weather_data(city):
     df.to_csv("data/weather_data.csv", index=False)
     print(f"✅ Saved weather data for {city} → data/weather_data.csv")
     return df
+
+import sqlite3
+
+def append_to_db(new_data):
+    conn = sqlite3.connect("data/climate_ai.db")
+    new_data.to_sql("weather_data", conn, if_exists="append", index=False)
+    conn.close()
+    print("✅ Real-time forecast appended to DB")
+
