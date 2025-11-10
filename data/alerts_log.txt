@@ -144,3 +144,68 @@
 2025-11-08 18:24:51 | Ahmedabad | Heatwave | 🔥 Heatwave alert in Ahmedabad: sensor 41.13°C exceeds AI mean by 13.87°C
 2025-11-08 18:24:51 | Ahmedabad | Rainfall | 🌧️ Heavy rainfall alert in Ahmedabad: 8.96 mm
 2025-11-08 18:24:52 | Ahmedabad | Rainfall | 🌧️ Heavy rainfall alert in Ahmedabad: 16.93 mm
+2025-11-10 15:04:59 | Bengaluru | LowHumidity | ⚠️ Very low humidity in Bengaluru: 37.6%
+2025-11-10 15:05:03 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 34.39°C exceeds AI mean by 8.64°C
+2025-11-10 15:05:04 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 10.77 mm
+2025-11-10 15:05:05 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 27.82°C exceeds AI mean by 2.07°C
+2025-11-10 15:05:05 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 11.22 mm
+2025-11-10 15:05:06 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 35.74°C exceeds AI mean by 9.99°C
+2025-11-10 15:05:07 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 35.65°C exceeds AI mean by 9.90°C
+2025-11-10 15:05:07 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 13.6 mm
+2025-11-10 15:05:07 | Bengaluru | LowHumidity | ⚠️ Very low humidity in Bengaluru: 30.38%
+2025-11-10 15:05:08 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 31.49°C exceeds AI mean by 5.74°C
+2025-11-10 15:05:08 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 9.67 mm
+2025-11-10 15:05:08 | Bengaluru | LowHumidity | ⚠️ Very low humidity in Bengaluru: 38.79%
+2025-11-10 15:05:10 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 28.77°C exceeds AI mean by 3.02°C
+2025-11-10 15:05:10 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 18.44 mm
+2025-11-10 15:05:11 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 34.84°C exceeds AI mean by 9.09°C
+2025-11-10 15:05:11 | Bengaluru | LowHumidity | ⚠️ Very low humidity in Bengaluru: 38.09%
+2025-11-10 15:05:12 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 6.41 mm
+2025-11-10 15:05:13 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 29.78°C exceeds AI mean by 4.03°C
+2025-11-10 15:05:14 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 29.04°C exceeds AI mean by 3.29°C
+2025-11-10 15:05:16 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 29.19°C exceeds AI mean by 3.44°C
+2025-11-10 15:05:16 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 8.54 mm
+2025-11-10 15:05:17 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 32.84°C exceeds AI mean by 7.09°C
+2025-11-10 15:05:18 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 6.25 mm
+2025-11-10 15:05:19 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 12.57 mm
+2025-11-10 15:05:20 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 33.53°C exceeds AI mean by 7.78°C
+2025-11-10 15:05:20 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 6.89 mm
+2025-11-10 15:05:21 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 30.72°C exceeds AI mean by 4.97°C
+2025-11-10 15:05:21 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 16.42 mm
+2025-11-10 15:05:22 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 14.37 mm
+2025-11-10 15:05:23 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 31.98°C exceeds AI mean by 6.23°C
+2025-11-10 15:05:24 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 31.85°C exceeds AI mean by 6.10°C
+2025-11-10 15:05:24 | Bengaluru | LowHumidity | ⚠️ Very low humidity in Bengaluru: 32.65%
+2025-11-10 15:05:25 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 39.2°C exceeds AI mean by 13.45°C
+2025-11-10 15:05:25 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 7.02 mm
+2025-11-10 15:05:26 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 40.06°C exceeds AI mean by 14.31°C
+2025-11-10 15:05:26 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 16.07 mm
+2025-11-10 15:05:27 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 39.97°C exceeds AI mean by 14.22°C
+2025-11-10 15:05:28 | Bengaluru | Heatwave | 🔥 Heatwave alert in Bengaluru: sensor 35.47°C exceeds AI mean by 9.72°C
+2025-11-10 15:05:28 | Bengaluru | Rainfall | 🌧️ Heavy rainfall alert in Bengaluru: 6.42 mm
+2025-11-10 15:11:16 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 36.35°C exceeds AI mean by 8.36°C
+2025-11-10 15:11:17 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 39.98°C exceeds AI mean by 11.99°C
+2025-11-10 15:11:17 | Surat | Rainfall | 🌧️ Heavy rainfall alert in Surat: 9.34 mm
+2025-11-10 15:11:18 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 35.72°C exceeds AI mean by 7.73°C
+2025-11-10 15:11:18 | Surat | Rainfall | 🌧️ Heavy rainfall alert in Surat: 11.7 mm
+2025-11-10 15:11:19 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 31.16°C exceeds AI mean by 3.17°C
+2025-11-10 15:11:20 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 38.74°C exceeds AI mean by 10.75°C
+2025-11-10 15:11:20 | Surat | Rainfall | 🌧️ Heavy rainfall alert in Surat: 19.22 mm
+2025-11-10 15:11:21 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 35.88°C exceeds AI mean by 7.89°C
+2025-11-10 15:11:22 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 41.21°C exceeds AI mean by 13.22°C
+2025-11-10 15:11:23 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 40.58°C exceeds AI mean by 12.59°C
+2025-11-10 15:11:24 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 40.87°C exceeds AI mean by 12.88°C
+2025-11-10 15:11:24 | Surat | LowHumidity | ⚠️ Very low humidity in Surat: 37.77%
+2025-11-10 15:11:25 | Surat | Rainfall | 🌧️ Heavy rainfall alert in Surat: 15.44 mm
+2025-11-10 15:11:26 | Surat | LowHumidity | ⚠️ Very low humidity in Surat: 31.63%
+2025-11-10 15:11:29 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 39.96°C exceeds AI mean by 11.97°C
+2025-11-10 15:11:31 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 34.96°C exceeds AI mean by 6.97°C
+2025-11-10 15:11:31 | Surat | Rainfall | 🌧️ Heavy rainfall alert in Surat: 6.19 mm
+2025-11-10 15:11:33 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 34.68°C exceeds AI mean by 6.69°C
+2025-11-10 15:11:34 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 40.9°C exceeds AI mean by 12.91°C
+2025-11-10 15:11:35 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 40.81°C exceeds AI mean by 12.82°C
+2025-11-10 15:11:36 | Surat | LowHumidity | ⚠️ Very low humidity in Surat: 35.93%
+2025-11-10 15:11:37 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 39.95°C exceeds AI mean by 11.96°C
+2025-11-10 15:11:38 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 36.46°C exceeds AI mean by 8.47°C
+2025-11-10 15:11:40 | Surat | Rainfall | 🌧️ Heavy rainfall alert in Surat: 21.11 mm
+2025-11-10 15:11:41 | Surat | Heatwave | 🔥 Heatwave alert in Surat: sensor 34.68°C exceeds AI mean by 6.69°C

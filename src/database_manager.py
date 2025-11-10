@@ -10,12 +10,26 @@ DB_PATH = os.path.join(os.path.dirname(__file__), "../data/climate_ai.db")
 # Database setup and helpers
 # -----------------------------------------------------
 def init_db():
+    import sqlite3
+    import os
+
     os.makedirs(os.path.join(os.path.dirname(__file__), "../data"), exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
-    print(f"🗄️ Database initialized at: {os.path.abspath(DB_PATH)}")   # ✅ Debug print
     cursor = conn.cursor()
 
+    print(f"🗄️ Database initialized at: {os.path.abspath(DB_PATH)}")
 
+    # --- Check if iot_data table has correct schema ---
+    try:
+        cursor.execute("PRAGMA table_info(iot_data);")
+        cols = [row[1] for row in cursor.fetchall()]
+        if not {"lat", "lon"}.issubset(set(cols)):
+            print("⚠️ Old iot_data schema detected — recreating table with lat/lon support.")
+            cursor.execute("DROP TABLE IF EXISTS iot_data;")
+    except Exception as e:
+        print(f"⚠️ Schema check failed: {e}")
+
+    # --- Create tables ---
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS forecasts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,6 +48,8 @@ def init_db():
         temperature REAL,
         humidity REAL,
         rainfall REAL,
+        lat REAL,
+        lon REAL,
         timestamp TEXT
     )
     """)
@@ -50,6 +66,7 @@ def init_db():
 
     conn.commit()
     conn.close()
+
 
 
 # -----------------------------------------------------
