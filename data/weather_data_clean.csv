@@ -1,7 +1,0 @@
-city,temperature,humidity,pressure,weather,wind_speed,date_time
-Mumbai,27.99,78,1011,haze,4.63,2025-11-04 18:26:29
-Delhi,27.05,44,1008,haze,2.06,2025-11-04 18:26:30
-Chennai,27.6,87,1008,broken clouds,6.17,2025-11-04 18:26:32
-Bangalore,23.96,78,1011,scattered clouds,2.68,2025-11-04 18:26:34
-Kolkata,26.97,74,1007,smoke,3.6,2025-11-04 18:26:36
-Hyderabad,26.23,78,1011,light intensity drizzle,2.57,2025-11-04 18:26:38
