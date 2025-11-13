@@ -1,6 +1,12 @@
+  
+
 {
   "enable_email": true,
+  "provider": "gmail",
+  "smtp_host": "smtp.gmail.com",
+  "smtp_port": 587,
   "sender_email": "nithin00614@gmail.com",
-  "sender_password": "mdvqualairojlise",
-  "receiver_email": "nithingowda00614@gmail.com"
+  "sender_password": "mdvq uala iroj lise",
+  "receiver_email": "nithingowda00614@gmail.com",
+  "send_only_on_high": true
 }

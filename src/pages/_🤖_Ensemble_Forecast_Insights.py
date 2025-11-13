@@ -7,7 +7,12 @@ import plotly.express as px
 from models.shap_explainer import _normalize_city_data, train_xgb_for_shap
 import shap
 
-st.set_page_config(page_title="🌍 Cross-City Explainability", layout="wide")
+st.set_page_config(layout="wide")
+
+st.markdown("""
+# 🤖 Ensemble Forecast Insights  
+Compare model contributions and analyze ensemble weighting.
+""")
 st.title("🌍 GeoClimate AI — Cross-City SHAP Comparison")
 
 DATA_DIR = "data"

@@ -17,7 +17,12 @@ import streamlit as st
 from streamlit_extras.stylable_container import stylable_container
 
 
-st.set_page_config(page_title="📡 IoT & Climate Risk Alerts", layout="wide")
+st.set_page_config(layout="wide")
+
+st.markdown("""
+# 📡 IoT Sensor Dashboard  
+Live climate sensor data with CRI computation and geolocation tracking.
+""")
 
 DB_PATH = "data/climate_ai.db"
 

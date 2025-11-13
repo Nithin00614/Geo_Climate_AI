@@ -13,7 +13,12 @@ MODELS_DIR = "models"
 os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(MODELS_DIR, exist_ok=True)
 
-st.set_page_config(page_title="🧩 Model Manager", layout="wide")
+st.set_page_config(layout="wide")
+
+st.markdown("""
+# 🧪 Model Manager  
+Train, retrain, delete, or inspect models for all cities.
+""")
 st.title("🧩 GeoClimate AI — Model Lifecycle Manager")
 
 # --- Helper functions ---

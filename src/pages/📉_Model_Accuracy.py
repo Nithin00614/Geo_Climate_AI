@@ -5,7 +5,12 @@ import plotly.express as px
 import os
 from evaluate_models import evaluate_all_cities
 
-st.set_page_config(page_title="📊 Model Accuracy Dashboard", layout="wide")
+st.set_page_config(layout="wide")
+
+st.markdown("""
+# 📉 Model Accuracy Dashboard  
+Evaluate RMSE, MAE, and performance metrics for all trained city models.
+""")
 st.title("📊 GeoClimate AI — Model Accuracy Evaluation")
 
 metrics_path = "metrics/model_accuracy.csv"

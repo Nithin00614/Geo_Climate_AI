@@ -6,7 +6,12 @@ import plotly.express as px
 import time
 import random
 
-st.set_page_config(page_title="⚠️ IoT & Climate Risk Dashboard", layout="wide")
+st.set_page_config(layout="wide")
+
+st.markdown("""
+# 🚨 Climate Risk Alerts  
+View recent alerts triggered by IoT sensors with CRI thresholds.
+""")
 
 st.title("⚠️ GeoClimate AI — IoT & Climate Risk Analytics")
 

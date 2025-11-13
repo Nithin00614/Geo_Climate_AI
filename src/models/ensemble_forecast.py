@@ -1,173 +1,143 @@
-# src/models/ensemble_forecast.py
-import os
 import numpy as np
 import pandas as pd
-from sklearn.metrics import mean_squared_error, mean_absolute_error
-from lstm_model import predict_next_n_days
+from datetime import timedelta
+from sklearn.preprocessing import MinMaxScaler
+import warnings
+warnings.filterwarnings("ignore")
 
-# Optional imports
-try:
-    from prophet import Prophet
-except Exception:
-    Prophet = None
-
-try:
-    from xgboost import XGBRegressor
-except Exception:
-    XGBRegressor = None
+# --- Import your models ---
+from models.lstm_model import load_lstm_model
+from models.xgb_model import load_xgb_model
+from models.prophet_model import run_prophet_forecast
 
 
-# --- Utility: Data cleaner ---
-def _normalize(df):
-    df = df.copy()
-    df.columns = [c.lower().strip() for c in df.columns]
+TIME_STEPS = 14  # Window size
 
-    # rename temp->temperature if needed
-    if "temp" in df.columns and "temperature" not in df.columns:
-        df.rename(columns={"temp": "temperature"}, inplace=True)
-
-    # fill missing columns
-    n = len(df)
-    if "temperature" not in df.columns:
-        df["temperature"] = np.random.uniform(22, 30, n)
-    if "humidity" not in df.columns:
-        df["humidity"] = np.clip(np.random.normal(60, 10, n), 10, 100)
-    if "rainfall" not in df.columns:
-        df["rainfall"] = np.zeros(n)
-    if "city" not in df.columns:
-        df["city"] = "unknown"
-
-    # clean date
-    if "date" not in df.columns:
-        df["date"] = pd.date_range(end=pd.Timestamp.today(), periods=n)
-    else:
-        df["date"] = pd.to_datetime(df["date"], errors="coerce")
-        df.dropna(subset=["date"], inplace=True)
-        df.sort_values("date", inplace=True)
-        df.reset_index(drop=True, inplace=True)
-
-    # remove extreme NaN or 0 data
-    df = df.dropna(subset=["temperature"]).copy()
-    if len(df) < 2:
-        # synthesize 30 samples if data too small
-        base_temp = np.random.uniform(24, 28)
-        df = pd.DataFrame({
-            "date": pd.date_range(end=pd.Timestamp.today(), periods=30),
-            "temperature": np.random.normal(base_temp, 1, 30),
-            "humidity": np.random.uniform(40, 80, 30),
-            "rainfall": np.random.uniform(0, 10, 30),
-            "city": ["synthetic_city"] * 30
-        })
-
-    return df
-
-
-# --- Prophet model ---
-def prophet_forecast(df, city, days=14):
-    if Prophet is None:
-        return None
+# -----------------------------------------------------
+# Helper function: safe scaler
+# -----------------------------------------------------
+def prepare_scaler(df):
+    scaler = MinMaxScaler()
     try:
-        city_df = df[df["city"].str.lower() == city.lower()].copy()
-        city_df = _normalize(city_df)
-        if len(city_df) < 5:
-            return None
-        mdf = city_df[["date", "temperature"]].rename(columns={"date": "ds", "temperature": "y"})
-        model = Prophet(daily_seasonality=True)
-        model.fit(mdf)
-        fut = model.make_future_dataframe(periods=days)
-        pred = model.predict(fut)
-        return pred[["ds", "yhat"]].tail(days)
-    except Exception:
-        return None
+        scaled = scaler.fit_transform(df)
+    except:
+        print("⚠️ Could not scale with existing scaler. Re-fitting.")
+        df = df.fillna(0)
+        scaled = scaler.fit_transform(df)
+    return scaler, scaled
 
 
-# --- XGBoost model ---
-def xgb_forecast(df, city, days=14):
-    if XGBRegressor is None:
-        return None
+# -----------------------------------------------------
+# LSTM FORECAST
+# -----------------------------------------------------
+def lstm_forecast(df, city, model, scaler):
     try:
-        city_df = df[df["city"].str.lower() == city.lower()].copy()
-        city_df = _normalize(city_df)
-        if len(city_df) < 10:
-            return None
-        features = ["temperature", "humidity", "rainfall"]
-        X = city_df[features].iloc[:-days]
-        y = city_df["temperature"].iloc[1:len(X) + 1]
-        model = XGBRegressor(n_estimators=100, learning_rate=0.1, random_state=42)
-        model.fit(X, y)
-        preds = model.predict(city_df[features].tail(days))
-        return pd.DataFrame({"ds": city_df["date"].tail(days), "yhat": preds})
-    except Exception:
-        return None
+        feature_cols = ["temperature", "humidity", "rainfall", "wind_speed"]
+        for col in feature_cols:
+            if col not in df.columns:
+                df[col] = 0
+
+        feats = df[feature_cols]
+        scaled = scaler.transform(feats)
+
+        window = scaled[-TIME_STEPS:]
+        if window.shape[0] < TIME_STEPS:
+            print(f"⚠️ Not enough data for LSTM for {city}. Filling window.")
+            padding = np.zeros((TIME_STEPS - window.shape[0], window.shape[1]))
+            window = np.vstack([padding, window])
+
+        preds = []
+        current = window.copy()
+
+        for _ in range(14):
+            p = model.predict(current.reshape(1, TIME_STEPS, len(feature_cols)))
+            preds.append(float(p[0]))
+
+            next_step = np.zeros((1, len(feature_cols)))
+            next_step[0, 0] = p  # only temperature predicted
+
+            current = np.vstack([current[1:], next_step])
+
+        return preds
+
+    except Exception as e:
+        print(f"❌ LSTM forecast error for {city}: {e}")
+        return [np.nan] * 14
 
 
-# --- LSTM model ---
-def lstm_forecast(df, city, days=14):
+# -----------------------------------------------------
+# XGBOOST FORECAST
+# -----------------------------------------------------
+def xgb_forecast(df, city, model):
     try:
-        res = predict_next_n_days(df, city, days)
-        if res is None:
-            return None
-        return res.rename(columns={"date": "ds", "predicted_temperature": "yhat"})
-    except Exception:
-        return None
+        feature_cols = ["temperature", "humidity", "rainfall", "wind_speed"]
+        for col in feature_cols:
+            if col not in df.columns:
+                df[col] = 0
+
+        feats = df[feature_cols].tail(1).values
+        preds = []
+
+        last_vals = feats.copy()
+        for _ in range(14):
+            p = model.predict(last_vals)[0]
+            preds.append(float(p))
+
+            last_vals = np.array([[p, last_vals[0][1], last_vals[0][2], last_vals[0][3]]])
+
+        return preds
+
+    except Exception as e:
+        print(f"❌ XGBoost forecast error for {city}: {e}")
+        return [np.nan] * 14
 
 
-# --- Dynamic ensemble ---
-def ensemble_forecast(df, city, days=14):
-    """
-    Generates a final fused forecast ('final_pred') using dynamic model weighting.
-    Auto-recovers from short or missing data.
-    """
-    city_df = _normalize(df)
-    city_df = city_df[city_df["city"].str.lower() == city.lower()]
-    if city_df.empty:
-        return None
+# -----------------------------------------------------
+# MAIN ENSEMBLE FORECAST
+# -----------------------------------------------------
+def ensemble_forecast(df, city):
 
-    # Collect model forecasts
-    lstm_df = lstm_forecast(city_df, city, days)
-    prophet_df = prophet_forecast(city_df, city, days)
-    xgb_df = xgb_forecast(city_df, city, days)
+    df = df.sort_values("date")
 
-    if lstm_df is None:
-        return None
+    # Load models
+    lstm_model, scaler = load_lstm_model(city)
+    xgb_model = load_xgb_model(city)
 
-    merged = lstm_df.rename(columns={"yhat": "yhat_lstm"}).copy()
-    merged["yhat_prophet"] = prophet_df["yhat"].values if prophet_df is not None else merged["yhat_lstm"].values
-    merged["yhat_xgb"] = xgb_df["yhat"].values if xgb_df is not None else merged["yhat_lstm"].values
+    # LSTM predictions
+    lstm_pred = lstm_forecast(df.copy(), city, lstm_model, scaler)
 
-    # --- Calculate weights dynamically based on synthetic validation ---
-    n = min(30, len(city_df))
-    hist = city_df.tail(n)
-    actual = hist["temperature"].values
+    # Prophet predictions
+    prophet_pred = run_prophet_forecast(df.copy(), horizon=14)
 
-    models = {
-        "lstm": merged["yhat_lstm"].values[:n],
-        "prophet": merged["yhat_prophet"].values[:n],
-        "xgb": merged["yhat_xgb"].values[:n],
-    }
+    # XGBoost predictions
+    xgb_pred = xgb_forecast(df.copy(), city, xgb_model)
 
-    rmse = {}
-    for name, preds in models.items():
-        try:
-            rmse[name] = np.sqrt(mean_squared_error(actual[:len(preds)], preds[:len(actual)]))
-        except Exception:
-            rmse[name] = 1.0
+    # Clean arrays
+    y_lstm = np.array(lstm_pred, dtype=float)
+    y_prophet = np.array(prophet_pred, dtype=float)
+    y_xgb = np.array(xgb_pred, dtype=float)
 
-    inv_rmse = {k: 1 / (v + 1e-6) for k, v in rmse.items()}
-    total = sum(inv_rmse.values())
-    weights = {k: v / total for k, v in inv_rmse.items()}
+    # Weight based on recent performance (placeholder static weights)
+    w_lstm = 0.4
+    w_prophet = 0.3
+    w_xgb = 0.3
 
-    # --- Final unified prediction ---
-    merged["final_pred"] = (
-        weights["lstm"] * merged["yhat_lstm"] +
-        weights["prophet"] * merged["yhat_prophet"] +
-        weights["xgb"] * merged["yhat_xgb"]
-    )
+    final = (y_lstm * w_lstm) + (y_prophet * w_prophet) + (y_xgb * w_xgb)
 
-    merged["city"] = city
-    merged["lstm_weight"] = weights["lstm"]
-    merged["prophet_weight"] = weights["prophet"]
-    merged["xgb_weight"] = weights["xgb"]
+    # Dates for next 14 days
+    start_date = df["date"].max() + timedelta(days=1)
+    future_dates = [start_date + timedelta(days=i) for i in range(14)]
 
-    return merged[["city", "ds", "yhat_lstm", "yhat_prophet", "yhat_xgb",
-                   "final_pred", "lstm_weight", "prophet_weight", "xgb_weight"]]
+    # Output dataframe
+    out = pd.DataFrame({
+        "date": future_dates,
+        "yhat_lstm": y_lstm,
+        "yhat_prophet": y_prophet,
+        "yhat_xgb": y_xgb,
+        "predicted_temperature": final,
+        "lstm_weight": [w_lstm] * 14,
+        "prophet_weight": [w_prophet] * 14,
+        "xgb_weight": [w_xgb] * 14
+    })
+
+    return out

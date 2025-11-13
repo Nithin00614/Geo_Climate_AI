@@ -4,7 +4,12 @@ import pandas as pd
 import os
 from auto_retrain import auto_retrain_models
 
-st.set_page_config(page_title="🤖 Auto-Retrain Dashboard", layout="wide")
+st.set_page_config(layout="wide")
+
+st.markdown("""
+# 🔄 Auto Retrain  
+Schedule or trigger automated model retraining on fresh data.
+""")
 st.title("🤖 GeoClimate AI — Automated Model Retraining")
 
 metrics_path = "metrics/model_accuracy.csv"
