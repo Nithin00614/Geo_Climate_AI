@@ -1,0 +1,8 @@
+{
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "sender_email": "nithin00614@gmail.com",
+    "app_password": "dpnfmmnmdacesuha",
+    "receiver_email": "nithingowda00614@gmail.com",
+    "extra_receivers": []
+}

@@ -1,0 +1,11 @@
+pandas
+numpy
+scikit-learn
+joblib
+plotly
+requests
+
+# Optional / recommended for full ML:
+tensorflow>=2.10.0    # for LSTM
+prophet               # or fbprophet depending on environment
+xgboost

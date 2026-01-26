@@ -1,15 +1,59 @@
-# src/app.py
+# ================================================
+# GeoClimate AI - Main App Launcher (No Import Errors)
+# ================================================
+
+import os
+import sys
 import streamlit as st
 
-st.set_page_config(page_title="🌦️ GeoClimate AI", layout="wide")
+# ------------------------------------------------
+# FIX PYTHON PATH (WORKS FROM ANY LOCATION)
+# ------------------------------------------------
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(CURRENT_DIR)
 
-st.title("🌍 GeoClimate AI — Integrated Predictive Climate Intelligence")
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+# Now src folder becomes importable:
+# src/models
+# src/utils
+# src/pages  (Streamlit autoloads)
+# ------------------------------------------------
+
+# Set page config
+st.set_page_config(
+    page_title="GeoClimate AI",
+    page_icon="🌍",
+    layout="wide",
+)
+
+# Import common UI elements
+try:
+    from src.utils.sidebar_style import apply_sidebar_style
+    from src.utils.banner import top_banner
+except Exception as e:
+    st.error(f"⚠️ UI import error: {e}")
+
+# Apply sidebar + banner
+try:
+    apply_sidebar_style()
+    top_banner()
+except:
+    pass
+
+# Home page content
+st.title("🌍 GeoClimate AI — Smart Climate Intelligence Platform")
 
 st.markdown("""
-### Welcome to GeoClimate AI 🌎  
-Select a dashboard from the sidebar to get started:
-- **🌤️ AI Forecast & Model Dashboard** → 14-day predictions, model training, and visualization.  
-- **⚠️ IoT & Climate Risk Dashboard** → live IoT sensor data, alerts, and risk visualization.  
+### 👋 Welcome to GeoClimate AI  
+A unified AI-powered system for:
+- **14-Day Ensemble Weather Forecasts**
+- **IoT Sensor Monitoring & Alerting**
+- **Climate Risk Analytics**
+- **Model Explainability (XAI)**
+- **Automated Retraining**
+- **Daily Summary Emails**
+- **Database Viewer**
 """)
 
-st.sidebar.success("Select a dashboard from the sidebar 👉")
