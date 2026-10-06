@@ -43,7 +43,7 @@ except:
     pass
 
 # Home page content
-st.title("🌍 GeoClimate AI — Smart Climate Intelligence Platform")
+st.title("🌍 GeoClimate AI — Smart Climate Intelligence PlatForm")
 
 st.markdown("""
 ### 👋 Welcome to GeoClimate AI  

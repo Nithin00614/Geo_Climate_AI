@@ -2,7 +2,7 @@ import streamlit as st
 
 
 def apply_sidebar_style():
-    """Apply custom sidebar styling to Streamlit app."""
+    """Apply Custom sidebar styling to Streamlit app."""
     st.markdown(
         """
         <style>
