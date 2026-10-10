@@ -1,5 +1,5 @@
 # ================================================
-# GeoClimate AI - Main App Launcher (No Import Errors)
+# GeoClimate AI - Main App Launcher (No Import)
 # ================================================
 
 import os
